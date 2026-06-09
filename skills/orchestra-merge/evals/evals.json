@@ -1,0 +1,32 @@
+{
+  "skill_name": "orchestra-merge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Merge core-logic",
+      "expected_output": "impl/core-logic branch merged into main. Branch deleted. Spec status updated to closed. Work item materials table updated. Devlog entry written.",
+      "assertions": [
+        "Skill reads spec.md and confirms status is reviewed before merging",
+        "Skill does not merge if spec.md status is not reviewed",
+        "impl/{ticket-id} branch is merged into main",
+        "impl/{ticket-id} branch is deleted after merge",
+        "spec.md frontmatter status updated to closed",
+        "Milestone PRD materials table row updated to Done for this work item",
+        "Devlog entry written to .orchestra/devlog/{quarter}/{date}-merge-{ticket}.md",
+        "Devlog entry names what was merged",
+        "Skill does not push to remote unless explicitly instructed"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Merge core-logic (when spec status is complete, not reviewed)",
+      "expected_output": "Skill stops and instructs user to run orchestra-review first.",
+      "assertions": [
+        "Skill reads spec.md status before attempting merge",
+        "Skill reports that status is complete, not reviewed",
+        "Skill instructs user to run /orchestra-review first",
+        "Skill does not merge the branch"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "skill_name": "orchestra-program",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "What is orchestra and how does it work?",
+      "expected_output": "Clear explanation covering: the metaphor (composer/conductor/musicians/score), the pipeline (scaffold → roadmap → plan → implement → review → merge), the file structure (.orchestra/), status vocabulary, and the skill index.",
+      "assertions": [
+        "Response explains the Composer role (the human)",
+        "Response explains the Conductor role (the agent)",
+        "Response explains the Score metaphor (the spec)",
+        "Response describes the full pipeline in order",
+        "Response describes the .orchestra/ folder structure",
+        "Response covers status vocabulary: draft, approved, in-progress, complete, reviewed, closed",
+        "Response lists or references the available skills",
+        "Response does not modify any files"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Where do I start?",
+      "expected_output": "Actionable cold-start instructions: scaffold → write Brief → roadmap → plan → implement.",
+      "assertions": [
+        "Response includes /orchestra-scaffold as the first step",
+        "Response mentions the README ## Brief section",
+        "Response includes /orchestra-roadmap as the second step",
+        "Response includes /orchestra-plan as the third step",
+        "Response does not suggest running deprecated individual skills (orchestra-prd, orchestra-spec, orchestra-gherkin) as the primary workflow"
+      ]
+    }
+  ]
+}

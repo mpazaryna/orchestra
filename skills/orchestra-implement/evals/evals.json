@@ -1,0 +1,34 @@
+{
+  "skill_name": "orchestra-implement",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Implement core-logic",
+      "expected_output": "impl/core-logic branch created. Each spec step executed in order with commits. Spec status updated to in-progress then complete. All deliverables present at specified paths.",
+      "assertions": [
+        "impl/{ticket-id} branch exists in git",
+        "Branch has at least one commit per major spec step",
+        "spec.md frontmatter status updated to in-progress before implementation begins",
+        "spec.md frontmatter status updated to complete when all steps are done",
+        "All files listed in spec.md ## Deliverables table exist at their specified paths",
+        "No deliverable file is empty or contains only placeholder content",
+        "Test files exist for each test tier specified in spec.md ## Testing Strategy",
+        "Test files are committed before the implementation files they cover",
+        "Skill does not start if spec.md status is not approved",
+        "Skill does not push the branch to remote",
+        "Skill does not merge the branch"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Implement core-logic (when working tree is not clean)",
+      "expected_output": "Skill detects uncommitted changes, reports them, and stops without starting implementation.",
+      "assertions": [
+        "Skill checks git status before starting",
+        "Skill reports uncommitted changes",
+        "Skill does not create a branch",
+        "Skill does not modify any files"
+      ]
+    }
+  ]
+}

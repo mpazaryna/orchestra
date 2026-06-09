@@ -1,0 +1,39 @@
+{
+  "skill_name": "orchestra-spec",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a spec for core-logic",
+      "expected_output": "Spec derived entirely from the approved PRD. Contains all three test tiers. Acceptance criteria split into Functional/Unit/Integration/E2E sections. An agent reading only this spec could execute without questions.",
+      "assertions": [
+        "spec.md written to .orchestra/work/core-logic/spec.md",
+        "spec.md frontmatter has status: draft",
+        "spec.md contains a ## Objective section restated from PRD",
+        "spec.md contains a ## Approach section with numbered steps",
+        "spec.md contains a ## Testing Strategy section",
+        "spec.md contains a ### Unit Tests subsection with named test files and covered behaviors",
+        "spec.md contains a ### Integration Tests subsection",
+        "spec.md integration tests state they hit real boundaries — no mocks at the seam",
+        "spec.md contains a ### E2E Tests subsection",
+        "spec.md contains a ## Deliverables table with concrete file paths",
+        "spec.md contains a ## Acceptance Criteria section",
+        "spec.md acceptance criteria split into ### Functional, ### Unit, ### Integration, ### E2E subsections",
+        "spec.md contains a ## Risks section with at least one risk and mitigation",
+        "Every PRD success criterion maps to at least one acceptance criterion in spec.md",
+        "spec.md approach steps are ordered by dependency — no step requires output from a later step",
+        "Skill reads the PRD before generating — does not ask user to re-explain the objective"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a spec for a work item that touches an external API",
+      "expected_output": "Integration tests section explicitly requires hitting the real API endpoint. Mocking the external boundary is called out as insufficient.",
+      "assertions": [
+        "spec.md integration tests explicitly state they hit the real external API",
+        "spec.md does not permit mocking the external API in integration tests",
+        "spec.md includes at least one integration test that verifies real API response shape",
+        "spec.md ## Risks section includes risks related to the external API (rate limits, auth, schema drift)"
+      ]
+    }
+  ]
+}

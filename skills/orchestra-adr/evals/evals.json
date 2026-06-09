@@ -1,0 +1,33 @@
+{
+  "skill_name": "orchestra-adr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Record the decision to use zoneinfo over pytz for timezone handling",
+      "expected_output": "ADR file written with correct sequential numbering. Contains Decision, Rationale, and Consequences sections. Status accepted. Captures the alternatives considered.",
+      "assertions": [
+        "ADR file written to .orchestra/adr/ADR-{NNN}-{slug}.md",
+        "ADR number is sequential — one higher than the highest existing ADR",
+        "ADR frontmatter has id field matching the filename number",
+        "ADR frontmatter has status: accepted",
+        "ADR frontmatter has created_on date",
+        "ADR contains a ## Decision section with a single clear decision statement",
+        "ADR contains a ## Rationale section explaining why this option was chosen",
+        "ADR contains a ## Consequences section describing what this decision enables or constrains",
+        "ADR mentions at least one alternative that was considered and rejected",
+        "ADR does not record a trivial decision — it represents a real fork in the road"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Record the decision to use TOML for config files",
+      "expected_output": "ADR captures the decision with alternatives (JSON, YAML, INI) and the specific rationale for choosing TOML.",
+      "assertions": [
+        "ADR ## Decision states which format was chosen",
+        "ADR ## Rationale explains why TOML was chosen over alternatives",
+        "ADR names at least one alternative format that was considered",
+        "ADR ## Consequences includes what changes for agents or developers as a result"
+      ]
+    }
+  ]
+}

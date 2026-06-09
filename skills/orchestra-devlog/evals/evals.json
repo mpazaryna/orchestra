@@ -1,0 +1,31 @@
+{
+  "skill_name": "orchestra-devlog",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a devlog for today's work",
+      "expected_output": "Devlog file written to .orchestra/devlog/{YYYY}-Q{N}/{YYYY-MM-DD}-devlog.md with correct structure.",
+      "assertions": [
+        "Devlog file written to .orchestra/devlog/{YYYY}-Q{N}/ directory",
+        "Devlog filename includes today's date",
+        "Devlog frontmatter has created_on field with today's date",
+        "Devlog has a ## What Happened section",
+        "Devlog has a ## Decisions section or equivalent",
+        "Devlog has a ## Next Steps section",
+        "Devlog content is specific — not generic placeholder text",
+        "Quarter directory matches today's date (Q1=Jan-Mar, Q2=Apr-Jun, Q3=Jul-Sep, Q4=Oct-Dec)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Journal today's work from git commits",
+      "expected_output": "Devlog synthesized from git log. Commit messages translated into narrative form. File written to correct location.",
+      "assertions": [
+        "Skill runs git log to read recent commits",
+        "Devlog narrative references actual commit content, not generic descriptions",
+        "Devlog is written in first-person narrative, not a bulleted commit list",
+        "File written to correct quarter directory"
+      ]
+    }
+  ]
+}

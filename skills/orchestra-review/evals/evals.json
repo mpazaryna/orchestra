@@ -1,0 +1,52 @@
+{
+  "skill_name": "orchestra-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review the implementation for core-logic",
+      "expected_output": "Structured review report with PASS or FAIL verdict, every acceptance criterion evaluated with evidence, and a devlog entry written to .orchestra/devlog/.",
+      "assertions": [
+        "Review report contains ## Review: {ticket-id} header",
+        "Verdict is explicitly PASS or FAIL — no ambiguous language like 'mostly done' or 'nearly complete'",
+        "Every acceptance criterion from spec.md is listed with a PASS or FAIL result",
+        "Every PASS result includes specific evidence (file path, line reference, or quoted output)",
+        "Every FAIL result includes what specifically is missing or wrong",
+        "Deliverables table is checked — each file confirmed present, non-empty, and not a placeholder",
+        "TDD tier check is performed: unit tests present and committed before implementation",
+        "TDD tier check is performed: integration tests present for any external boundary",
+        "TDD tier check is performed: E2E tests present for user-facing interface",
+        "Missing any TDD tier results in FAIL verdict",
+        "Devlog file written to .orchestra/devlog/{quarter}/{date}-review-{ticket}.md",
+        "Devlog contains Verdict section",
+        "Devlog contains Findings section with specific details",
+        "Devlog contains Next Step section",
+        "If PASS: spec.md frontmatter status updated to reviewed",
+        "If FAIL: spec.md frontmatter status is NOT changed"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review the implementation for timezone-picklist",
+      "expected_output": "FAIL verdict when integration tests are missing or mock the real timezone data source instead of hitting it.",
+      "assertions": [
+        "If integration tests mock the external timezone data source, verdict is FAIL",
+        "FAIL reason explicitly states integration tests must hit real boundary",
+        "Report lists the specific file or test that is mocking what should be real",
+        "Devlog is written even when verdict is FAIL",
+        "Devlog Next Step lists the specific blocking issues to fix before re-review"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Review the implementation for 001-core-logic",
+      "expected_output": "Review reads the correct spec from .orchestra/work/001-core-logic/spec.md and diffs the impl/001 branch.",
+      "assertions": [
+        "Skill reads spec from .orchestra/work/001-core-logic/spec.md",
+        "Skill checks git log for impl/001 branch",
+        "Skill runs git diff main...impl/001 to review the full diff",
+        "Review does not proceed if spec status is not complete",
+        "Review does not merge the branch"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "skill_name": "orchestra-gherkin",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate Gherkin for core-logic",
+      "expected_output": "gherkin-spec.md written alongside spec.md. Valid Gherkin syntax. Feature name matches spec title. At least one error/negative scenario. 3-7 scenarios total.",
+      "assertions": [
+        "gherkin-spec.md written to .orchestra/work/core-logic/gherkin-spec.md",
+        "gherkin-spec.md contains a fenced gherkin code block",
+        "gherkin-spec.md Feature name matches the spec title exactly",
+        "gherkin-spec.md Source reference points to spec.md",
+        "Every scenario has at least one Given, one When, one Then",
+        "No scenario uses Given/When/Then back-to-back — And is used to chain",
+        "Scenario names are sentence case with no punctuation",
+        "gherkin-spec.md contains at least one error or negative scenario",
+        "gherkin-spec.md contains between 3 and 7 scenarios",
+        "Every spec acceptance criterion maps to at least one scenario",
+        "Skill prefers spec.md over prd.md when both exist"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Generate Gherkin for a feature with many acceptance criteria (more than 7 scenarios needed)",
+      "expected_output": "Scenarios split into multiple Feature blocks rather than one Feature with 8+ scenarios.",
+      "assertions": [
+        "Output contains more than one Feature block",
+        "No single Feature block has more than 7 scenarios",
+        "All acceptance criteria from the spec are still covered across the Feature blocks"
+      ]
+    }
+  ]
+}

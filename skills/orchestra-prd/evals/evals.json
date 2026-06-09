@@ -1,0 +1,37 @@
+{
+  "skill_name": "orchestra-prd",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a PRD for adding CSV export to the reporting dashboard",
+      "expected_output": "PRD written as a business document. Problem and Objective in user/outcome language. No technical implementation details. Success criteria observable by a non-technical stakeholder.",
+      "assertions": [
+        "prd.md written to .orchestra/work/{id}/prd.md",
+        "prd.md frontmatter has status: draft",
+        "prd.md contains a ## Objective section",
+        "prd.md contains a ## Success Criteria section with at least 2 checkboxes",
+        "prd.md contains a ## Context section",
+        "prd.md contains a ## Materials table",
+        "prd.md contains a ## References section",
+        "prd.md ## Objective is written from user/business perspective, not implementation perspective",
+        "prd.md ## Success Criteria are observable by a non-technical stakeholder",
+        "prd.md contains no framework or library names",
+        "prd.md contains no file paths in the narrative body",
+        "prd.md contains no HTTP method names or endpoint paths",
+        "Skill presents PRD for review and asks approval questions before writing"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a PRD for the core-logic milestone",
+      "expected_output": "PRD reads roadmap and active milestone context before generating. References the parent milestone.",
+      "assertions": [
+        "Skill reads .orchestra/roadmap.md before generating",
+        "Skill reads the active milestone PRD for context",
+        "prd.md ## References includes the parent milestone PRD path",
+        "prd.md ## Context traces back to a milestone in the roadmap",
+        "Milestone PRD materials table is updated to include this work item row"
+      ]
+    }
+  ]
+}

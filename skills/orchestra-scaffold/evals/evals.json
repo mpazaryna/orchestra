@@ -1,0 +1,50 @@
+{
+  "skill_name": "orchestra-scaffold",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Set up orchestra for this project",
+      "expected_output": "Folder structure created, README.md updated with Brief section template, ADR-000 written, templates written. No questions asked.",
+      "assertions": [
+        ".orchestra/ directory exists",
+        ".orchestra/README.md exists and is non-empty",
+        ".orchestra/adr/ADR-000-the-score.md exists",
+        ".orchestra/adr/ADR-000-the-score.md frontmatter has status: accepted",
+        ".orchestra/work/TEMPLATES/prd.md exists",
+        ".orchestra/work/TEMPLATES/spec.md exists",
+        ".orchestra/uml/ directory exists",
+        ".orchestra/devlog/ directory exists",
+        ".orchestra/devlog/ contains a current quarter subdirectory (e.g. 2026-Q2/)",
+        "README.md at project root exists",
+        "README.md contains a ## Brief section",
+        "README.md ## Brief section contains a Vision field",
+        "README.md ## Brief section contains an Audience field",
+        "Scaffold report instructs user to fill in Brief and run /orchestra-roadmap",
+        "Skill asked no questions during execution"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Set up orchestra for this project (when .orchestra/ already exists)",
+      "expected_output": "Skill detects existing .orchestra/ directory, reports what is there, and stops without creating or overwriting anything.",
+      "assertions": [
+        "Skill reports that .orchestra/ already exists",
+        "Skill lists what is present in the existing .orchestra/ directory",
+        "Skill does not create any new files",
+        "Skill does not overwrite any existing files",
+        "Skill stops after reporting"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Set up orchestra for this project (when README.md already exists with no Brief section)",
+      "expected_output": "Existing README.md is appended with a Brief section template. Existing content is preserved.",
+      "assertions": [
+        "Existing README.md content is preserved",
+        "## Brief section is appended to the end of README.md",
+        "## Brief section contains Vision and Audience placeholder fields",
+        "README.md was not overwritten — original content still present"
+      ]
+    }
+  ]
+}

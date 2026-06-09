@@ -1,0 +1,30 @@
+{
+  "skill_name": "orchestra-uml",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "sequence diagram of the orchestra planning pipeline",
+      "expected_output": "Mermaid sequence diagram written to .orchestra/uml/. Valid sequenceDiagram syntax. Shows the PRD → Spec → Gherkin → implement → review → merge flow.",
+      "assertions": [
+        "Diagram file written to .orchestra/uml/{name}.md",
+        "File contains a fenced mermaid code block",
+        "Mermaid block starts with sequenceDiagram",
+        "Diagram includes at least 3 participants",
+        "Diagram shows at least 5 message arrows",
+        "Diagram filename is kebab-case and descriptive"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "deployment diagram showing on-device vs cloud components",
+      "expected_output": "Mermaid graph TB with subgraphs for on-device and cloud. Valid syntax.",
+      "assertions": [
+        "Diagram file written to .orchestra/uml/",
+        "Mermaid block uses graph TB",
+        "Diagram contains at least 2 subgraph blocks",
+        "Subgraphs are labeled meaningfully (e.g. On-Device, Cloud)",
+        "Diagram shows at least one connection between subgraphs"
+      ]
+    }
+  ]
+}

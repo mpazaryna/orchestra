@@ -1,0 +1,47 @@
+{
+  "skill_name": "orchestra-roadmap",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Bootstrap a roadmap (README has ## Brief with Vision and Audience filled in)",
+      "expected_output": "Skill reads Brief from README, proposes milestones without asking about vision or audience, presents draft roadmap for approval, writes roadmap.md and milestone stub PRDs on approval.",
+      "assertions": [
+        "Skill reads README.md before generating anything",
+        "Skill extracts Vision and Audience from ## Brief section without AskUserQuestion",
+        "Skill proposes milestones derived from the Vision content",
+        "Skill presents draft roadmap and asks for approval before writing files",
+        ".orchestra/roadmap.md written after approval",
+        "roadmap.md contains ## Milestones materials table with at least one row",
+        "roadmap.md contains ## Success Criteria section",
+        "roadmap.md contains ## Context section",
+        "roadmap.md contains ## References section linking to ADR-000",
+        "At least one milestone stub PRD written to .orchestra/work/{slug}/prd.md",
+        "Milestone stub PRD frontmatter has status: draft",
+        "Milestone stub PRD body instructs user to run /orchestra-plan"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "status",
+      "expected_output": "Roll-up view of all milestones and their deliverable-level progress. No files modified.",
+      "assertions": [
+        "Skill reads .orchestra/roadmap.md",
+        "Skill reads each milestone PRD listed in roadmap materials table",
+        "Report shows milestone name and current status",
+        "Report shows deliverable count and progress for each milestone",
+        "Skill does not write or modify any files"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "next",
+      "expected_output": "Identifies the first incomplete milestone, lists what is not done, and suggests what to tackle next.",
+      "assertions": [
+        "Skill identifies the first milestone that is not Done",
+        "Skill lists items from that milestone marked Not Started",
+        "Skill suggests which item to tackle next",
+        "Skill does not modify any files"
+      ]
+    }
+  ]
+}

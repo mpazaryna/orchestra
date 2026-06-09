@@ -1,0 +1,60 @@
+{
+  "skill_name": "orchestra-plan",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build a Python CLI that converts times between timezones. It will be 100% TDD. The audience is developers who need reliable timezone conversion in scripts.",
+      "expected_output": "Three files written with status approved: prd.md (business document), spec.md (technical execution plan with TDD strategy), and gherkin-spec.md (BDD scenarios). All gates approved before advancing.",
+      "assertions": [
+        "prd.md exists at .orchestra/work/{id}/prd.md",
+        "prd.md frontmatter has status: approved",
+        "prd.md contains a ## Problem section",
+        "prd.md contains a ## Objective section",
+        "prd.md contains a ## Success Criteria section with at least 2 checkboxes",
+        "prd.md contains no framework or library names (pytest, click, argparse, zoneinfo, pytz, etc.)",
+        "prd.md contains no file paths in the narrative body",
+        "prd.md contains no technical implementation language",
+        "spec.md exists at .orchestra/work/{id}/spec.md",
+        "spec.md frontmatter has status: approved",
+        "spec.md contains a ## Testing Strategy section",
+        "spec.md contains a ### Unit Tests subsection",
+        "spec.md contains a ### Integration Tests subsection",
+        "spec.md contains a ### E2E Tests subsection",
+        "spec.md contains an ## Acceptance Criteria section",
+        "spec.md acceptance criteria are split into Functional, Unit, Integration, and E2E subsections",
+        "gherkin-spec.md exists at .orchestra/work/{id}/gherkin-spec.md",
+        "gherkin-spec.md contains at least one Scenario with Given/When/Then",
+        "gherkin-spec.md contains at least one error or negative scenario",
+        "gherkin-spec.md Feature name matches spec title"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need to build a REST API for managing a reading list. Users can add books, mark them read, and get recommendations. Python, TDD.",
+      "expected_output": "PRD focused on user value (not API design), spec with TDD strategy across all three tiers, Gherkin scenarios covering happy path and error cases.",
+      "assertions": [
+        "prd.md ## Problem section describes a user problem, not a system problem",
+        "prd.md ## Objective is written from user perspective, not implementation perspective",
+        "prd.md ## Success Criteria are observable by a non-technical stakeholder",
+        "prd.md contains no HTTP method names (GET, POST, PUT, DELETE)",
+        "prd.md contains no endpoint paths (/api/, /books/, etc.)",
+        "prd.md contains no database or ORM references",
+        "spec.md ## Testing Strategy integration section states tests hit real HTTP endpoints, not mocks",
+        "spec.md ## Risks section has at least one risk with a mitigation",
+        "gherkin-spec.md has 3 or more scenarios",
+        "gherkin-spec.md has at least one error scenario (invalid input, not found, etc.)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Resume planning for core-logic",
+      "expected_output": "Skill reads existing work item state, determines which stage is complete, and continues from the next unapproved stage without regenerating already-approved artifacts.",
+      "assertions": [
+        "Skill reads .orchestra/work/core-logic/ before generating anything",
+        "Skill does not overwrite an artifact with status: approved",
+        "Skill continues from the first incomplete stage",
+        "If all three artifacts exist with status approved, skill reports planning complete and stops"
+      ]
+    }
+  ]
+}

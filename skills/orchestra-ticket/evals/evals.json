@@ -1,0 +1,29 @@
+{
+  "skill_name": "orchestra-ticket",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add timezone search feature to the converter CLI",
+      "expected_output": "Work item folder created. Stub PRD written with draft status. Folder name is a kebab-case slug. Skill tells user to run /orchestra-plan next.",
+      "assertions": [
+        ".orchestra/work/{slug}/ directory created",
+        "Folder name is kebab-case",
+        ".orchestra/work/{slug}/prd.md exists",
+        "prd.md frontmatter has status: draft",
+        "prd.md frontmatter has created_on with today's date",
+        "prd.md has a title matching the ticket description",
+        "Skill tells user to run /orchestra-plan {slug} to start planning"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "86abc123 (ClickUp ticket ID)",
+      "expected_output": "Work item folder uses ClickUp ID as the ticket field. Stub PRD written.",
+      "assertions": [
+        "prd.md frontmatter ticket field contains the ClickUp ID",
+        "Work item folder name includes the ticket ID",
+        ".orchestra/work/{id}-{slug}/prd.md exists"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "skill_name": "orchestra-milestone",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review the active milestone",
+      "expected_output": "Reads roadmap, finds first In Progress or Not Started milestone, diffs its materials table against repo state, surfaces gaps, proposes next work items.",
+      "assertions": [
+        "Skill reads .orchestra/roadmap.md",
+        "Skill identifies the first milestone with status In Progress or Not Started",
+        "Skill reads that milestone's PRD",
+        "Skill checks each item in the milestone materials table against actual repo state",
+        "Report identifies which materials exist and which are missing",
+        "Report proposes at least one concrete next work item",
+        "Skill does not modify any files"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review the active milestone (when all milestones are Done)",
+      "expected_output": "Skill reports project is complete. No gaps surfaced.",
+      "assertions": [
+        "Skill reads all milestone statuses from roadmap.md",
+        "Skill reports that all milestones are Done",
+        "Skill does not propose new work items",
+        "Skill does not modify any files"
+      ]
+    }
+  ]
+}
