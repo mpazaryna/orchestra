@@ -2,7 +2,10 @@
   "mcpServers": {
     "orchestra": {
       "type": "http",
-      "url": "https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp"
+      "url": "https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ORCHESTRA_API_KEY}"
+      }
     }
   }
 }

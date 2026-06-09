@@ -1,4 +1,5 @@
 import { TOOL_DEFINITIONS, handleTool } from './tools.js';
+import { checkAuth } from './auth.js';
 
 interface McpRequest {
   jsonrpc?: string;
@@ -7,8 +8,12 @@ interface McpRequest {
   params?: { name?: string; arguments?: Record<string, string> };
 }
 
+interface Env {
+  API_KEY: string;
+}
+
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === '/health') {
@@ -16,6 +21,9 @@ export default {
     }
 
     if (url.pathname === '/mcp' && request.method === 'POST') {
+      const authError = checkAuth(request, env);
+      if (authError) return authError;
+
       const body = await request.json() as McpRequest;
       const id = body.id ?? null;
 
