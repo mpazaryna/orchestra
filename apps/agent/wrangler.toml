@@ -1,0 +1,12 @@
+name = "orchestra-agent"
+main = "src/index.ts"
+compatibility_date = "2026-01-28"
+compatibility_flags = ["nodejs_compat"]
+account_id = "01bfa3fc31e4462e21428e9ca7d63e98"
+
+[durable_objects]
+bindings = [{ name = "OrchestraAgent", class_name = "OrchestraAgent" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["OrchestraAgent"]

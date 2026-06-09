@@ -1,0 +1,23 @@
+{
+  "name": "@orchestra/agent",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.81",
+    "@cloudflare/think": "^0.7.3",
+    "@orchestra/core": "workspace:*",
+    "agents": "^0.13.3",
+    "ai": "^6.0.193",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "typescript": "^5.5.0",
+    "wrangler": "^4.0.0"
+  }
+}
