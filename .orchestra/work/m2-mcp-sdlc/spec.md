@@ -1,6 +1,6 @@
 ---
 ticket: m2-mcp-sdlc
-status: in-progress
+status: complete
 created_on: 2026-06-09
 ---
 
@@ -67,14 +67,14 @@ Add the live URL to `.mcp.json` in the orchestra repo itself as the first consum
 
 | File | Purpose | Status |
 |------|---------|--------|
-| apps/mcp-sdlc/src/index.ts | Worker fetch handler | Exists — review needed |
-| apps/mcp-sdlc/src/tools.ts | Tool definitions + handler | Exists — review needed |
-| apps/mcp-sdlc/src/tools.test.ts | Unit tests | Not Started |
-| apps/mcp-sdlc/src/index.test.ts | Handler routing tests | Not Started |
-| apps/mcp-sdlc/src/integration.test.ts | Integration tests | Not Started |
-| apps/mcp-sdlc/src/e2e.test.ts | E2E against live URL | Not Started |
-| apps/mcp-sdlc/tsconfig.json | TypeScript config | Not Started |
-| .mcp.json | orchestra as first consumer | Not Started |
+| apps/mcp-sdlc/src/index.ts | Worker fetch handler | Done |
+| apps/mcp-sdlc/src/tools.ts | Tool definitions + handler | Done |
+| apps/mcp-sdlc/src/tools.test.ts | Unit tests | Done |
+| apps/mcp-sdlc/src/index.test.ts | Handler routing tests | Done |
+| apps/mcp-sdlc/src/integration.test.ts | Integration tests | Done |
+| apps/mcp-sdlc/src/e2e.test.ts | E2E against live URL | Done |
+| apps/mcp-sdlc/tsconfig.json | TypeScript config | Done |
+| .mcp.json | orchestra as first consumer | Done |
 
 ## Acceptance Criteria
 
