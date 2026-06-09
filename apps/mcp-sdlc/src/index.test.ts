@@ -55,7 +55,7 @@ describe('POST /mcp — authorized', () => {
     });
   }
 
-  it('tools/list returns all 3 tools', async () => {
+  it('tools/list returns all 4 tools', async () => {
     const res = await mcp({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     expect(res.status).toBe(200);
     const body = await res.json() as { result: { tools: Array<{ name: string }> }; id: number };
