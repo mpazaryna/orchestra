@@ -4,7 +4,7 @@
  */
 import { describe, it, expect } from 'vitest';
 
-const BASE = process.env.WORKER_URL ?? 'http://localhost:8787';
+const BASE = process.env.WORKER_URL;
 
 async function mcp(body: object) {
   return fetch(`${BASE}/mcp`, {
@@ -14,7 +14,7 @@ async function mcp(body: object) {
   });
 }
 
-describe('Integration: orchestra-mcp-sdlc', () => {
+describe.skipIf(!BASE)('Integration: orchestra-mcp-sdlc', () => {
   it('GET /health returns ok', async () => {
     const res = await fetch(`${BASE}/health`);
     expect(res.status).toBe(200);
