@@ -1,4 +1,4 @@
-name = "orchestra-agent"
+name = "orchestra-agent-lenny"
 main = "src/index.ts"
 compatibility_date = "2026-01-28"
 compatibility_flags = ["nodejs_compat"]
