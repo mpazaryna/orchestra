@@ -1,6 +1,6 @@
 ---
 ticket: m2-mcp-sdlc
-status: approved
+status: in-progress
 created_on: 2026-06-09
 ---
 
