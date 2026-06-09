@@ -4,8 +4,8 @@
 
 ## Brief
 
-**Vision:** A single deployed MCP endpoint and agent any project can point at to run the full SDLC pipeline — intake through execution — with Claude Code writing artifacts locally.
-**Audience:** Engineers who want autonomous, AFK-capable software delivery across multiple projects.
+**Vision:** A suite of SDLC tools — agents, MCP servers, and skills — that together cover the full software development lifecycle, from idea intake through shipping and review. Any project can adopt the pieces it needs.
+**Audience:** Engineers and teams who want a composable, agentic SDLC they can deploy, extend, and run across multiple projects with minimal ceremony.
 
 ## Usage
 
