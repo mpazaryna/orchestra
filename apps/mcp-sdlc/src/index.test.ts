@@ -60,7 +60,7 @@ describe('POST /mcp — authorized', () => {
     expect(res.status).toBe(200);
     const body = await res.json() as { result: { tools: Array<{ name: string }> }; id: number };
     expect(body.id).toBe(1);
-    expect(body.result.tools).toHaveLength(3);
+    expect(body.result.tools).toHaveLength(4);
   });
 
   it('tools/call orchestra_get_prompt returns prompt', async () => {
