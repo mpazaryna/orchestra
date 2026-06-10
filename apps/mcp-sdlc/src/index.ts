@@ -27,6 +27,18 @@ export default {
       const body = await request.json() as McpRequest;
       const id = body.id ?? null;
 
+      if (body.method === 'initialize') {
+        return Response.json({
+          jsonrpc: '2.0',
+          id,
+          result: {
+            protocolVersion: '2024-11-05',
+            capabilities: { tools: {} },
+            serverInfo: { name: 'orchestra-mcp-sdlc', version: '0.0.0' },
+          },
+        });
+      }
+
       if (body.method === 'tools/list') {
         return Response.json({
           jsonrpc: '2.0',

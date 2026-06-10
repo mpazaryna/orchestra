@@ -55,6 +55,15 @@ describe('POST /mcp — authorized', () => {
     });
   }
 
+  it('initialize returns protocol version and server info', async () => {
+    const res = await mcp({ jsonrpc: '2.0', id: 0, method: 'initialize', params: {} });
+    expect(res.status).toBe(200);
+    const body = await res.json() as { result: { protocolVersion: string; serverInfo: { name: string } }; id: number };
+    expect(body.id).toBe(0);
+    expect(body.result.protocolVersion).toBe('2024-11-05');
+    expect(body.result.serverInfo.name).toBe('orchestra-mcp-sdlc');
+  });
+
   it('tools/list returns all 5 tools', async () => {
     const res = await mcp({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     expect(res.status).toBe(200);
