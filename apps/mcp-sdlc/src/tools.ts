@@ -10,7 +10,10 @@ export interface McpTool {
 export const TOOL_DEFINITIONS: McpTool[] = [
   {
     name: 'orchestra_get_prompt',
-    description: 'Get the system prompt for a given SDLC stage.',
+    description:
+      'Get the system prompt for a given SDLC stage. Most stages have a richer full playbook ' +
+      'served as a skill — call orchestra_list_skills to find it (e.g. prd → orchestra-prd, ' +
+      'spec → orchestra-spec, execute → orchestra-implement) and orchestra_get_skill to fetch it.',
     inputSchema: {
       type: 'object',
       properties: {

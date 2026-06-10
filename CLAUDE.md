@@ -45,6 +45,12 @@ pnpm build:skills  # regenerate src/skills.generated.ts from skills/*/SKILL.md
 - Adding a tool? Update `TOOL_DEFINITIONS` + `handleTool` in `src/tools.ts`,
   add unit tests, and bump the tool-count assertions in `tools.test.ts` and
   `index.test.ts`.
+- Tool design rule: if a tool accepts agent-composed prose (devlog, ADR, ticket),
+  take ONE free-form markdown `body` field — never multiple flat strings that
+  invite compression. Put the quality bar in the field description, cross-reference
+  the relevant skill in the tool description, and let the server contribute only
+  path/frontmatter/structure. Schema descriptions are the only guidance always in
+  a consumer's context — they are the wire-native channel for quality.
 - Auth: `API_KEY` Worker secret (`wrangler secret put API_KEY`); local value in
   `apps/mcp-sdlc/.dev.vars` (gitignored).
 - MCP protocol notes: notifications (no `id`) must get a 202, never a JSON-RPC
