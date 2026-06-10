@@ -149,6 +149,20 @@ describe('handleTool', () => {
       const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
       expect(result.readme.brief_section).toContain('## Brief');
     });
+
+    it('claude_md.create is a full CLAUDE.md pointing at the orchestra tools', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      expect(result.claude_md.create).toMatch(/^# CLAUDE\.md\n/);
+      expect(result.claude_md.create).toContain('orchestra_list_skills');
+      expect(result.claude_md.create).toContain('orchestra_get_skill');
+      expect(result.claude_md.create).toContain('orchestra_get_gates');
+    });
+
+    it('claude_md.section is appendable (no top-level heading)', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      expect(result.claude_md.section).not.toContain('# CLAUDE.md');
+      expect(result.claude_md.section).toContain('## Orchestra SDLC');
+    });
   });
 
   describe('orchestra_list_skills', () => {

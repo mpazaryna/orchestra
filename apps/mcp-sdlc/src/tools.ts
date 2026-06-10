@@ -53,7 +53,7 @@ export const TOOL_DEFINITIONS: McpTool[] = [
   },
   {
     name: 'orchestra_scaffold',
-    description: 'Generate all .orchestra/ scaffold files for a new project. Returns a files array (path + content) ready to write locally, plus readme helpers for creating or appending the Brief section.',
+    description: 'Generate all .orchestra/ scaffold files for a new project. Returns a files array (path + content) ready to write locally, plus readme helpers (create or append the Brief section) and claude_md helpers (create CLAUDE.md or append the Orchestra workflow section to an existing one).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -244,6 +244,26 @@ created_on:
 |------|-----------|
 `;
 
+const CLAUDE_MD_SECTION = `
+## Orchestra SDLC — required workflow
+
+This project follows the Orchestra SDLC, served by the \`orchestra-sdlc\` MCP server.
+The \`.orchestra/\` directory is the agent knowledge base — read \`roadmap.md\` and
+relevant ADRs before acting on any work item.
+
+Before starting any non-trivial work:
+
+1. Call \`orchestra_list_skills\` to see the available playbooks.
+2. Call \`orchestra_get_skill\` for the relevant activity (PRD, spec, gherkin,
+   implement, review, merge, …) and follow it as the playbook.
+3. Respect the gates (\`orchestra_get_gates\`): every work item has a PRD before
+   a spec, a spec before implementation. Nothing advances without explicit
+   human approval at each gate.
+
+Record sessions with \`orchestra_devlog_entry\` (write the returned file), and
+record significant decisions as ADRs in \`.orchestra/adr/\`.
+`;
+
 const README_BRIEF_SECTION = `
 ## Brief
 
@@ -305,6 +325,10 @@ export function handleTool(name: string, args: Record<string, string>) {
         readme: {
           create: readmeCreate(args.project_name || 'my-project'),
           brief_section: README_BRIEF_SECTION,
+        },
+        claude_md: {
+          create: `# CLAUDE.md\n${CLAUDE_MD_SECTION}`,
+          section: CLAUDE_MD_SECTION,
         },
       };
     }
