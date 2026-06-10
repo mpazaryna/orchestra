@@ -6,6 +6,11 @@ describe('TOOL_DEFINITIONS', () => {
     expect(TOOL_DEFINITIONS).toHaveLength(7);
   });
 
+  it('get_prompt description points consumers at the richer skill playbooks', () => {
+    const tool = TOOL_DEFINITIONS.find((t) => t.name === 'orchestra_get_prompt')!;
+    expect(tool.description).toContain('orchestra_get_skill');
+  });
+
   it('includes all expected tools', () => {
     const names = TOOL_DEFINITIONS.map(t => t.name);
     expect(names).toContain('orchestra_get_prompt');
