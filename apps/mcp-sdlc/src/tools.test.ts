@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { handleTool, TOOL_DEFINITIONS } from './tools.js';
 
 describe('TOOL_DEFINITIONS', () => {
-  it('exposes exactly 4 tools', () => {
-    expect(TOOL_DEFINITIONS).toHaveLength(4);
+  it('exposes exactly 5 tools', () => {
+    expect(TOOL_DEFINITIONS).toHaveLength(5);
   });
 
   it('includes all expected tools', () => {
@@ -12,6 +12,7 @@ describe('TOOL_DEFINITIONS', () => {
     expect(names).toContain('orchestra_get_gates');
     expect(names).toContain('orchestra_list_stages');
     expect(names).toContain('orchestra_devlog_entry');
+    expect(names).toContain('orchestra_scaffold');
   });
 });
 
@@ -95,6 +96,56 @@ describe('handleTool', () => {
       expect(result.content).toContain('More detail here.');
       expect(result.content).toContain('## Next');
       expect(result.content).toContain('Do this next.');
+    });
+  });
+
+  describe('orchestra_scaffold', () => {
+    it('returns 6 files for a Q2 date', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      expect(result.files).toHaveLength(6);
+    });
+
+    it('devlog .gitkeep is in the correct quarter dir', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      const paths = result.files.map((f: { path: string }) => f.path);
+      expect(paths).toContain('.orchestra/devlog/2026-Q2/.gitkeep');
+    });
+
+    it('devlog .gitkeep is in Q1 for a January date', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-01-15', project_name: 'my-app' });
+      const paths = result.files.map((f: { path: string }) => f.path);
+      expect(paths).toContain('.orchestra/devlog/2026-Q1/.gitkeep');
+    });
+
+    it('all expected paths are present', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      const paths = result.files.map((f: { path: string }) => f.path);
+      expect(paths).toContain('.orchestra/README.md');
+      expect(paths).toContain('.orchestra/adr/ADR-000-the-score.md');
+      expect(paths).toContain('.orchestra/work/TEMPLATES/prd.md');
+      expect(paths).toContain('.orchestra/work/TEMPLATES/spec.md');
+      expect(paths).toContain('.orchestra/uml/.gitkeep');
+    });
+
+    it('ADR-000 contains the supplied date', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      const adr = result.files.find((f: { path: string }) => f.path === '.orchestra/adr/ADR-000-the-score.md');
+      expect(adr.content).toContain('created_on: 2026-06-10');
+    });
+
+    it('readme.create contains the project name', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      expect(result.readme.create).toContain('# my-app');
+    });
+
+    it('readme.create defaults to my-project when no project_name given', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10' });
+      expect(result.readme.create).toContain('# my-project');
+    });
+
+    it('readme.brief_section contains the Brief heading', () => {
+      const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
+      expect(result.readme.brief_section).toContain('## Brief');
     });
   });
 
