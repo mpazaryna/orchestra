@@ -237,6 +237,39 @@ describe('handleTool', () => {
     it('throws for an unknown skill', () => {
       expect(() => handleTool('orchestra_get_skill', { name: 'orchestra-bogus' })).toThrow('Unknown skill: orchestra-bogus');
     });
+
+    // ADR-001: skills are served whole — support files fetchable via `file` arg
+    it('returns a files manifest of support files', () => {
+      const result = handleTool('orchestra_get_skill', { name: 'orchestra-devlog' });
+      expect(result.files).toContain('examples/devlog.md');
+      expect(result.files).toContain('examples/github-journal.md');
+    });
+
+    it('returns empty manifest for a skill with no support files', () => {
+      const result = handleTool('orchestra_get_skill', { name: 'orchestra-usher' });
+      expect(result.files).toEqual([]);
+    });
+
+    it('returns a support file when called with the file argument', () => {
+      const result = handleTool('orchestra_get_skill', { name: 'orchestra-devlog', file: 'examples/devlog.md' });
+      expect(result.name).toBe('orchestra-devlog');
+      expect(result.file).toBe('examples/devlog.md');
+      expect((result.content as string).length).toBeGreaterThan(1000);
+      expect(result.content).toContain('Devlog Documentation');
+    });
+
+    it('throws for an unknown support file, listing what exists', () => {
+      expect(() => handleTool('orchestra_get_skill', { name: 'orchestra-devlog', file: 'examples/nope.md' }))
+        .toThrow(/Unknown file.*examples\/devlog\.md/s);
+    });
+
+    it('schema exposes the optional file argument and the description teaches the two-step', () => {
+      const tool = TOOL_DEFINITIONS.find((t) => t.name === 'orchestra_get_skill')!;
+      const schema = tool.inputSchema as { properties: Record<string, unknown>; required: string[] };
+      expect(schema.properties).toHaveProperty('file');
+      expect(schema.required).toEqual(['name']);
+      expect(tool.description).toContain('file');
+    });
   });
 
   describe('unknown tool', () => {
