@@ -27,6 +27,11 @@ export default {
       const body = await request.json() as McpRequest;
       const id = body.id ?? null;
 
+      // Notifications (no id, e.g. notifications/initialized) get 202 per Streamable HTTP spec
+      if (body.id === undefined && body.method?.startsWith('notifications/')) {
+        return new Response(null, { status: 202 });
+      }
+
       if (body.method === 'initialize') {
         return Response.json({
           jsonrpc: '2.0',
