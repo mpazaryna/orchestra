@@ -1,4 +1,5 @@
 import { STAGES, STAGE_PROMPTS, STAGE_GATES } from '@orchestra/core';
+import { SKILLS, SKILL_NAMES } from './skills.generated.js';
 
 export interface McpTool {
   name: string;
@@ -60,6 +61,22 @@ export const TOOL_DEFINITIONS: McpTool[] = [
         project_name: { type: 'string', description: 'Project name — used in README heading if no README exists yet' },
       },
       required: ['date'],
+    },
+  },
+  {
+    name: 'orchestra_list_skills',
+    description: 'List all Orchestra skills with their descriptions and when to use each. Skills are full playbooks (PRD writing, spec writing, review, merge, etc.) — richer than the stage prompts.',
+    inputSchema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'orchestra_get_skill',
+    description: 'Get the full instructions (SKILL.md body) for an Orchestra skill. Follow the returned content as the playbook for that activity.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', enum: SKILL_NAMES, description: 'Skill name, e.g. orchestra-prd' },
+      },
+      required: ['name'],
     },
   },
 ];
@@ -289,6 +306,26 @@ export function handleTool(name: string, args: Record<string, string>) {
           create: readmeCreate(args.project_name || 'my-project'),
           brief_section: README_BRIEF_SECTION,
         },
+      };
+    }
+
+    case 'orchestra_list_skills':
+      return {
+        skills: SKILL_NAMES.map((n) => ({
+          name: n,
+          description: SKILLS[n].description,
+          when_to_use: SKILLS[n].whenToUse,
+        })),
+      };
+
+    case 'orchestra_get_skill': {
+      const skill = SKILLS[args.name];
+      if (!skill) throw new Error(`Unknown skill: ${args.name}`);
+      return {
+        name: skill.name,
+        description: skill.description,
+        when_to_use: skill.whenToUse,
+        content: skill.content,
       };
     }
 

@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "test": "vitest run",
+    "build:skills": "node scripts/build-skills.mjs",
+    "dev": "node scripts/build-skills.mjs && wrangler dev",
+    "deploy": "node scripts/build-skills.mjs && wrangler deploy",
+    "test": "node scripts/build-skills.mjs && vitest run",
     "test:integration": "vitest run src/integration.test.ts",
     "test:e2e": "vitest run src/e2e.test.ts"
   },

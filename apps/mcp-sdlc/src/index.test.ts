@@ -64,12 +64,12 @@ describe('POST /mcp — authorized', () => {
     expect(body.result.serverInfo.name).toBe('orchestra-mcp-sdlc');
   });
 
-  it('tools/list returns all 5 tools', async () => {
+  it('tools/list returns all 7 tools', async () => {
     const res = await mcp({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     expect(res.status).toBe(200);
     const body = await res.json() as { result: { tools: Array<{ name: string }> }; id: number };
     expect(body.id).toBe(1);
-    expect(body.result.tools).toHaveLength(5);
+    expect(body.result.tools).toHaveLength(7);
   });
 
   it('tools/call orchestra_get_prompt returns prompt', async () => {
@@ -99,6 +99,12 @@ describe('POST /mcp — authorized', () => {
     const res = await mcp({ jsonrpc: '2.0', id: 'abc-123', method: 'tools/list' });
     const body = await res.json() as { id: string };
     expect(body.id).toBe('abc-123');
+  });
+
+  it('notifications/initialized returns 202 with no body', async () => {
+    const res = await mcp({ jsonrpc: '2.0', method: 'notifications/initialized' });
+    expect(res.status).toBe(202);
+    expect(await res.text()).toBe('');
   });
 
   it('unknown method returns -32601 error', async () => {

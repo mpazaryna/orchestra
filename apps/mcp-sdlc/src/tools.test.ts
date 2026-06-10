@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { handleTool, TOOL_DEFINITIONS } from './tools.js';
 
 describe('TOOL_DEFINITIONS', () => {
-  it('exposes exactly 5 tools', () => {
-    expect(TOOL_DEFINITIONS).toHaveLength(5);
+  it('exposes exactly 7 tools', () => {
+    expect(TOOL_DEFINITIONS).toHaveLength(7);
   });
 
   it('includes all expected tools', () => {
@@ -13,6 +13,8 @@ describe('TOOL_DEFINITIONS', () => {
     expect(names).toContain('orchestra_list_stages');
     expect(names).toContain('orchestra_devlog_entry');
     expect(names).toContain('orchestra_scaffold');
+    expect(names).toContain('orchestra_list_skills');
+    expect(names).toContain('orchestra_get_skill');
   });
 });
 
@@ -146,6 +148,43 @@ describe('handleTool', () => {
     it('readme.brief_section contains the Brief heading', () => {
       const result = handleTool('orchestra_scaffold', { date: '2026-06-10', project_name: 'my-app' });
       expect(result.readme.brief_section).toContain('## Brief');
+    });
+  });
+
+  describe('orchestra_list_skills', () => {
+    it('returns all 17 skills with name, description, and when_to_use', () => {
+      const result = handleTool('orchestra_list_skills', {});
+      expect(result.skills).toHaveLength(17);
+      for (const skill of result.skills) {
+        expect(skill.name).toMatch(/^orchestra-/);
+        expect(skill.description.length).toBeGreaterThan(10);
+      }
+    });
+
+    it('includes the core loop skills', () => {
+      const result = handleTool('orchestra_list_skills', {});
+      const names = result.skills.map((s: { name: string }) => s.name);
+      for (const expected of ['orchestra-roadmap', 'orchestra-prd', 'orchestra-spec', 'orchestra-gherkin', 'orchestra-plan', 'orchestra-implement', 'orchestra-review', 'orchestra-merge']) {
+        expect(names).toContain(expected);
+      }
+    });
+  });
+
+  describe('orchestra_get_skill', () => {
+    it('returns full content for a known skill', () => {
+      const result = handleTool('orchestra_get_skill', { name: 'orchestra-prd' });
+      expect(result.name).toBe('orchestra-prd');
+      expect(result.content).toContain('# Write PRD');
+      expect((result.content as string).length).toBeGreaterThan(1000);
+    });
+
+    it('content excludes frontmatter', () => {
+      const result = handleTool('orchestra_get_skill', { name: 'orchestra-prd' });
+      expect(result.content).not.toContain('allowed-tools:');
+    });
+
+    it('throws for an unknown skill', () => {
+      expect(() => handleTool('orchestra_get_skill', { name: 'orchestra-bogus' })).toThrow('Unknown skill: orchestra-bogus');
     });
   });
 

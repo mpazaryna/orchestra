@@ -3,3 +3,8 @@ dist/
 .wrangler/
 *.local
 .env
+
+.dev.vars
+
+# codegen output — rebuilt by `pnpm build:skills` (chained into dev/test/deploy)
+*.generated.ts
