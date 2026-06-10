@@ -37,18 +37,26 @@ export const TOOL_DEFINITIONS: McpTool[] = [
   },
   {
     name: 'orchestra_devlog_entry',
-    description: 'Compose a devlog entry. Returns the file path and formatted markdown content ready to write locally.',
+    description:
+      'Compose a devlog entry. Returns the file path and formatted markdown content ready to write locally. ' +
+      'Before composing the body, call orchestra_get_skill with "orchestra-devlog" and follow that playbook — ' +
+      'it defines the structure, style, and quality bar for entries.',
     inputSchema: {
       type: 'object',
       properties: {
         date: { type: 'string', description: 'ISO date YYYY-MM-DD' },
         slug: { type: 'string', description: 'Short kebab-case name for the entry, e.g. m2-shipped' },
         title: { type: 'string', description: 'Full title of the entry' },
-        summary: { type: 'string', description: '1-3 sentence summary of what happened' },
-        details: { type: 'string', description: 'Body content — decisions, findings, context' },
-        next: { type: 'string', description: 'What comes next' },
+        body: {
+          type: 'string',
+          description:
+            'Full markdown body of the entry (everything after the H1 — the tool adds frontmatter and title). ' +
+            'Compose freely with ## sections: a short Summary, then sections that fit the session — key decisions ' +
+            'with rationale, gotchas, what shipped, what comes next. Use lists, tables, and code blocks; include ' +
+            'commit hashes, file paths, and test counts. Write readable multi-paragraph prose, not one compressed paragraph.',
+        },
       },
-      required: ['date', 'slug', 'title', 'summary'],
+      required: ['date', 'slug', 'title', 'body'],
     },
   },
   {
@@ -96,18 +104,11 @@ function devlogQuarterDir(date: string): string {
 }
 
 function devlogContent(args: Record<string, string>): string {
-  const { date, title, summary, details, next } = args;
-  const lines = [
-    `---`,
-    `created_on: ${date}`,
-    `---`,
-    ``,
-    `# ${date}: ${title}`,
-    ``,
-    `## Summary`,
-    ``,
-    summary,
-  ];
+  const { date, title, body, summary, details, next } = args;
+  const head = [`---`, `created_on: ${date}`, `---`, ``, `# ${date}: ${title}`, ``];
+  if (body) return [...head, body.trim()].join('\n');
+  // Legacy skeleton for callers predating the free-form `body` field.
+  const lines = [...head, `## Summary`, ``, summary];
   if (details) lines.push('', '## Details', '', details);
   if (next) lines.push('', '## Next', '', next);
   return lines.join('\n');
