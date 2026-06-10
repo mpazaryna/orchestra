@@ -58,7 +58,7 @@ describe('handleTool', () => {
         date: '2026-06-09',
         slug: 'test-entry',
         title: 'Test Entry',
-        summary: 'A test devlog entry.',
+        body: 'A test devlog entry.',
       });
       expect(result.path).toBe('.orchestra/devlog/2026-Q2/2026-06-09-test-entry.md');
     });
@@ -68,24 +68,43 @@ describe('handleTool', () => {
         date: '2026-02-01',
         slug: 'q1-entry',
         title: 'Q1 Entry',
-        summary: 'A Q1 entry.',
+        body: 'A Q1 entry.',
       });
       expect(result.path).toBe('.orchestra/devlog/2026-Q1/2026-02-01-q1-entry.md');
     });
 
-    it('content includes frontmatter, title, and summary', () => {
+    it('content wraps the body with frontmatter and H1', () => {
       const result = handleTool('orchestra_devlog_entry', {
         date: '2026-06-09',
         slug: 'test',
         title: 'My Entry',
-        summary: 'Something happened.',
+        body: '## Summary\n\nSomething happened.\n\n## Key Decisions\n\n- chose X over Y',
       });
       expect(result.content).toContain('created_on: 2026-06-09');
       expect(result.content).toContain('# 2026-06-09: My Entry');
-      expect(result.content).toContain('Something happened.');
+      expect(result.content).toContain('## Key Decisions');
+      expect(result.content).toContain('- chose X over Y');
     });
 
-    it('content includes details and next when provided', () => {
+    it('body markdown passes through verbatim — no template imposed', () => {
+      const body = '## What Shipped\n\n| Tool | Purpose |\n|---|---|\n| a | b |\n\n```ts\nconst x = 1;\n```';
+      const result = handleTool('orchestra_devlog_entry', {
+        date: '2026-06-09',
+        slug: 'test',
+        title: 'My Entry',
+        body,
+      });
+      expect(result.content).toContain(body);
+      expect(result.content).not.toContain('## Details');
+    });
+
+    it('schema requires body and cross-references the devlog skill', () => {
+      const tool = TOOL_DEFINITIONS.find((t) => t.name === 'orchestra_devlog_entry')!;
+      expect((tool.inputSchema as { required: string[] }).required).toContain('body');
+      expect(tool.description).toContain('orchestra-devlog');
+    });
+
+    it('legacy summary/details/next callers still get the old skeleton', () => {
       const result = handleTool('orchestra_devlog_entry', {
         date: '2026-06-09',
         slug: 'test',
@@ -94,10 +113,23 @@ describe('handleTool', () => {
         details: 'More detail here.',
         next: 'Do this next.',
       });
+      expect(result.content).toContain('## Summary');
       expect(result.content).toContain('## Details');
       expect(result.content).toContain('More detail here.');
       expect(result.content).toContain('## Next');
       expect(result.content).toContain('Do this next.');
+    });
+
+    it('body wins when both body and legacy fields are provided', () => {
+      const result = handleTool('orchestra_devlog_entry', {
+        date: '2026-06-09',
+        slug: 'test',
+        title: 'My Entry',
+        body: '## Freeform\n\ncontent',
+        summary: 'legacy summary',
+      });
+      expect(result.content).toContain('## Freeform');
+      expect(result.content).not.toContain('legacy summary');
     });
   });
 
