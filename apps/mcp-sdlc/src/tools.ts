@@ -81,11 +81,21 @@ export const TOOL_DEFINITIONS: McpTool[] = [
   },
   {
     name: 'orchestra_get_skill',
-    description: 'Get the full instructions (SKILL.md body) for an Orchestra skill. Follow the returned content as the playbook for that activity.',
+    description:
+      'Get the full instructions (SKILL.md body) for an Orchestra skill, plus a manifest of its ' +
+      'support files. Follow the returned content as the playbook for that activity. When the ' +
+      'playbook says to load a support file (e.g. examples/devlog.md), call this tool again with ' +
+      'the file argument to fetch it.',
     inputSchema: {
       type: 'object',
       properties: {
         name: { type: 'string', enum: SKILL_NAMES, description: 'Skill name, e.g. orchestra-prd' },
+        file: {
+          type: 'string',
+          description:
+            'Optional path to a support file within the skill directory, e.g. "examples/devlog.md". ' +
+            'Omit to get the SKILL.md body plus the list of available support files.',
+        },
       },
       required: ['name'],
     },
@@ -349,11 +359,21 @@ export function handleTool(name: string, args: Record<string, string>) {
     case 'orchestra_get_skill': {
       const skill = SKILLS[args.name];
       if (!skill) throw new Error(`Unknown skill: ${args.name}`);
+      if (args.file) {
+        const content = skill.files[args.file];
+        if (content === undefined) {
+          throw new Error(
+            `Unknown file "${args.file}" in skill ${skill.name}. Available: ${Object.keys(skill.files).join(', ') || '(none)'}`,
+          );
+        }
+        return { name: skill.name, file: args.file, content };
+      }
       return {
         name: skill.name,
         description: skill.description,
         when_to_use: skill.whenToUse,
         content: skill.content,
+        files: Object.keys(skill.files),
       };
     }
 
