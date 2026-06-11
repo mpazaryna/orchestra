@@ -1,6 +1,6 @@
 ---
 ticket: 003-starter
-status: complete
+status: reviewed
 created_on: 2026-06-11
 ---
 
