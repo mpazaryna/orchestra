@@ -37,7 +37,7 @@ expose. Requires only M2 (MCP SDLC), which is live.
 | Material | Location | Status |
 |----------|----------|--------|
 | orchestra-pilot cold-agent test | .orchestra/work/001-orchestra-pilot/prd.md | Built & first run complete (verdict: catalog not discovered — see findings) |
-| Scheduled headless run design | TBD | Not Started |
+| Scheduled headless run design | .orchestra/work/002-afk-runner/prd.md | PRD approved (repo-centric per ADR-003) |
 | Gate notification mechanism | TBD | Not Started |
 | End-to-end pipeline test | .orchestra/work/ | Not Started |
 | Failure list → M3 PRD input | .orchestra/work/001-orchestra-pilot/findings.md | First findings delivered (F4 = first Lenny requirement) |
