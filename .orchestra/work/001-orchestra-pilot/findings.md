@@ -109,3 +109,62 @@ leaks added capability, and the catalog was still ignored).
 Ship F1's fix (server `instructions` + sharpened descriptions), deploy, and
 re-run `apps/orchestra-pilot/run.sh` unchanged. The delta between this
 report and the next is the measured value of the instructions channel.
+
+---
+
+# Re-run 20260611T120026Z — After the F1 Fix
+
+Same harness, same brief, zero edits. Only the wire changed: `instructions`
+at initialize + the START-HERE `orchestra_list_stages` description
+(deployed as Worker version fb499873).
+
+**Verdicts flipped from 8/9 NO to 8/9 YES.**
+
+| Measurement | Run 1 | Run 2 |
+|-------------|-------|-------|
+| discoveredStages | NO | YES |
+| fetchedStagePrompt | NO | YES |
+| scaffoldedKnowledgeBase | NO | YES |
+| listedSkills | NO | YES |
+| fetchedSkill | NO | YES |
+| fetchedSupportFile | NO | NO |
+| producedPrdArtifact | NO | YES |
+| wroteDevlog | NO | YES |
+| stoppedAtHumanGate | YES (vacuous) | YES (genuine) |
+
+Run-2 behavior: first substantive call was `orchestra_list_stages`, then
+`get_prompt(intake)` → `list_skills` → `scaffold`. Produced a full
+`.orchestra/` knowledge base (roadmap, 3 milestone PRDs, M1 spec +
+gherkin, ADR-001..003, devlog), fetched the roadmap and PRD skills, made
+**zero** Bash attempts (vs 17 denied in run 1), and ended at a genuine
+SDLC gate: stack confirmation + approval to implement, with pointers to
+every artifact. It even wrote a `CLAUDE.md` directing future agents to
+follow Orchestra. This run **is** M5's first staged proof: one pipeline
+run, intake → plan, AFK.
+
+**F1: resolved and measured.** The initialize `instructions` field is the
+entry point; its measured value is the entire verdict flip above.
+
+**F2: resolved by the same fix** — "plan before building" in the
+instructions reversed the code-first default. **F3 dissolved** in run 2
+(a planning-framed agent never needed Bash) but remains real for the
+*execute* stage of future AFK runs.
+
+## F6 — The ADR-001 two-step is still silent (minor)
+
+**Observed:** Run 2 fetched `orchestra-roadmap` and `orchestra-prd` skills
+but never called `orchestra_get_skill` with the `file` argument, despite
+skill bodies referencing support files.
+
+**Gap:** The two-step is taught only in the `orchestra_get_skill`
+description; the skill bodies' relative references ("read
+`examples/prd.md`") don't remind the consumer that the same tool serves
+them. Low impact this run (artifacts were convention-correct anyway).
+
+**Candidate fix:** Server appends a one-line footer to served SKILL.md
+bodies listing the support files and the call to fetch them. Defer until a
+run shows real quality loss; re-evaluate on the next pilot.
+
+**F4 stands** as the open finding and the first requirement for M3 Lenny:
+the run ended with a perfect gate question and no channel to deliver it,
+wait, and resume.
