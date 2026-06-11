@@ -1,6 +1,6 @@
 ---
 ticket: m3-agent-lenny
-status: approved
+status: in-progress
 created_on: 2026-06-11
 ---
 
