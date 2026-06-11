@@ -4,6 +4,13 @@ compatibility_date = "2026-01-28"
 compatibility_flags = ["nodejs_compat"]
 account_id = "01bfa3fc31e4462e21428e9ca7d63e98"
 
+[vars]
+ORCHESTRA_MCP_URL = "https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp"
+LENNY_PUBLIC_URL = "https://orchestra-agent-lenny.mpazbot.workers.dev"
+
+[observability]
+enabled = true
+
 [durable_objects]
 bindings = [{ name = "OrchestraAgent", class_name = "OrchestraAgent" }]
 

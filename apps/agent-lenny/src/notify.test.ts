@@ -56,7 +56,7 @@ describe('sendNotification', () => {
     const n = buildNotification(GATE, 'https://lenny.example.com', 'relnotes');
     const result = await sendNotification('https://hooks.example.com/x', n, fetchMock);
     expect(result.ok).toBe(false);
-    expect(result.error).toContain('500');
+    if (!result.ok) expect(result.error).toContain('500');
   });
 
   it('catches network errors', async () => {
@@ -66,6 +66,6 @@ describe('sendNotification', () => {
     const n = buildNotification(GATE, 'https://lenny.example.com', 'relnotes');
     const result = await sendNotification('https://hooks.example.com/x', n, fetchMock);
     expect(result.ok).toBe(false);
-    expect(result.error).toContain('connection refused');
+    if (!result.ok) expect(result.error).toContain('connection refused');
   });
 });
