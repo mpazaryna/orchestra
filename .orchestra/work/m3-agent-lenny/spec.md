@@ -1,6 +1,6 @@
 ---
 ticket: m3-agent-lenny
-status: complete
+status: closed
 created_on: 2026-06-11
 ---
 
