@@ -8,3 +8,6 @@ dist/
 
 # codegen output — rebuilt by `pnpm build:skills` (chained into dev/test/deploy)
 *.generated.ts
+
+# runner transcripts accumulate per tick; today's demo evidence stays tracked, future runs stay local
+apps/afk-runner/runs/

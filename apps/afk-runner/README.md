@@ -29,7 +29,6 @@ scheduler ──▶ run.sh <repo> <work-item>
 
 ```bash
 ./preflight.sh                                  # live boundaries OK?
-./seed.sh [~/workspace/relnotes]                # seed target from parked Lenny
 ./run.sh ~/workspace/relnotes m1-skeleton       # one tick, by hand
 ```
 
@@ -39,7 +38,8 @@ Schedule it: edit and install `com.orchestra.afk-runner.plist` (launchd,
 
 Ticks are cheap when blocked: `check-state` answers from the filesystem and
 no session starts. Overlap-safe via lockfile. Transcripts archive under
-`runs/<timestamp>/` here, not in the target repo.
+`runs/<timestamp>/` here, not in the target repo (gitignored going forward;
+force-add a run if it's evidence worth keeping).
 
 Env: `ORCHESTRA_API_KEY` (falls back to `../mcp-sdlc/.dev.vars`; expanded
 into the target's `.mcp.json`), `NTFY_TOPIC`, `AFK_MAX_TURNS` (default 50).
