@@ -1,6 +1,6 @@
 ---
 ticket: 001-orchestra-pilot
-status: reviewed
+status: closed
 created_on: 2026-06-11
 ---
 
