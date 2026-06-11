@@ -46,3 +46,4 @@ speculation.
 - ADR-000: [The Score](.orchestra/adr/ADR-000-the-score.md)
 - ADR-002: [AFK First](.orchestra/adr/ADR-002-afk-first.md)
 - ADR-003: [The Repo Is the Workspace](.orchestra/adr/ADR-003-the-repo-is-the-workspace.md)
+- ADR-004: [Gate Notifications over ntfy](.orchestra/adr/ADR-004-ntfy-gate-notifications.md)
