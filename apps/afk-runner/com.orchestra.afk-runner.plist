@@ -14,7 +14,7 @@
     <string>/bin/bash</string>
     <string>/Users/mpaz/workspace/orchestra/apps/afk-runner/run.sh</string>
     <string>/Users/mpaz/workspace/relnotes</string>
-    <string>m1-skeleton</string>
+    <string>m2-curation</string>
   </array>
   <key>StartInterval</key>
   <integer>900</integer>
