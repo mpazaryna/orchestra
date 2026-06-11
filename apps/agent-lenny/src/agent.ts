@@ -17,7 +17,7 @@ export interface Env {
 interface LennyConfig {
   workItem: string;
   briefPreview: string;
-  phase: 'idle' | 'working' | 'gated' | 'done';
+  phase: 'idle' | 'working' | 'gated' | 'done' | 'paused';
   startedAt: number;
   lastActivity: number;
   turnRuns: number;
@@ -223,6 +223,14 @@ export class OrchestraAgent extends Think<Env> {
       }
     }
     return null;
+  }
+
+  async pause(): Promise<{ phase: string }> {
+    // Inert state: the heartbeat only continues 'working' runs, so 'paused'
+    // stops autonomous turns. In-flight turns finish; gates stay answerable
+    // (answering a gate is explicit human intent and resumes work).
+    this.updateConfig({ phase: 'paused', lastActivity: Date.now() });
+    return { phase: 'paused' };
   }
 
   async readMessages(): Promise<unknown[]> {

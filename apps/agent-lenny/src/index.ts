@@ -118,6 +118,10 @@ export default {
       return Response.json(await agent.startWork(brief.trim()));
     }
 
+    if (pathname === '/pause' && request.method === 'POST') {
+      return Response.json(await agent.pause());
+    }
+
     if (pathname === '/status' && request.method === 'GET') {
       return Response.json(await agent.getStatus());
     }
