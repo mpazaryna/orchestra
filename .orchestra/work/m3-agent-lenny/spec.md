@@ -1,6 +1,6 @@
 ---
 ticket: m3-agent-lenny
-status: in-progress
+status: complete
 created_on: 2026-06-11
 ---
 
@@ -110,15 +110,15 @@ written; this is the milestone's proof.
 
 | File | Purpose | Status |
 |------|---------|--------|
-| apps/agent-lenny/src/mcp-proxy.ts (+ test) | 7 orchestra tools over HTTP | Not Started |
-| apps/agent-lenny/src/workspace.ts | DO-backed file tools + endpoints | Not Started |
-| apps/agent-lenny/src/gates.ts (+ test) | Gate store + lifecycle | Not Started |
-| apps/agent-lenny/src/notify.ts (+ test) | Webhook notification adapter | Not Started |
-| apps/agent-lenny/src/index.ts | HTTP routes (work/status/gates/answer) | Rework |
-| apps/agent-lenny/src/agent.ts | Conductor loop, raise_gate, opus-4-8 | Rework |
-| apps/agent-lenny/src/prompt.ts | Conductor system prompt | Rework |
-| apps/agent-lenny/vitest config + package scripts | Test wiring | Not Started |
-| .orchestra/work/m3-agent-lenny/demo.md | Gate-survival demo transcript | Not Started |
+| (superseded) mcp-proxy.ts | Replaced by native `addMcpServer` mount in agent.ts — zero drift, framework MCP client | Superseded |
+| (superseded) workspace.ts | Think's built-in DO workspace + export RPCs in agent.ts | Superseded |
+| apps/agent-lenny/src/gates.ts (+ test) | Gate store + lifecycle | Delivered |
+| apps/agent-lenny/src/notify.ts (+ test) | Webhook notification adapter | Delivered |
+| apps/agent-lenny/src/index.ts | HTTP routes (work/status/gates/answer/workspace/messages) | Delivered |
+| apps/agent-lenny/src/agent.ts | Conductor loop, raise_gate, opus-4-8, heartbeat | Delivered |
+| apps/agent-lenny/src/prompt.ts | Conductor system prompt | Delivered |
+| apps/agent-lenny vitest + tsconfig + integration.test.ts | Test wiring | Delivered |
+| .orchestra/work/m3-agent-lenny/demo.md | Gate-survival demo transcript | Delivered |
 
 ## Acceptance Criteria
 

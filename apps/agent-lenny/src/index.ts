@@ -126,15 +126,18 @@ export default {
       return Response.json(await agent.listGates());
     }
 
+    if (pathname === '/messages' && request.method === 'GET') {
+      return Response.json(await agent.readMessages());
+    }
+
     if (pathname === '/workspace' && request.method === 'GET') {
       return Response.json(await agent.readWorkspace());
     }
 
     const fileMatch = pathname.match(/^\/workspace\/(.+)$/);
     if (fileMatch && request.method === 'GET') {
-      const files = await agent.readWorkspace();
-      const content = files[fileMatch[1]] ?? files['/' + fileMatch[1]];
-      if (content === undefined) return Response.json({ error: 'not found' }, { status: 404 });
+      const content = await agent.readWorkspaceFile(fileMatch[1]);
+      if (content === null) return Response.json({ error: 'not found' }, { status: 404 });
       return new Response(content, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     }
 

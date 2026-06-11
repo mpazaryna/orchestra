@@ -190,12 +190,57 @@ export class OrchestraAgent extends Think<Env> {
 
   async readWorkspace(): Promise<Record<string, string>> {
     const files: Record<string, string> = {};
-    const paths = await this.workspace.glob('**/*');
-    for (const path of paths) {
-      const content = await this.workspace.readFile(typeof path === 'string' ? path : String(path));
-      if (content !== null) files[typeof path === 'string' ? path : String(path)] = content;
-    }
+    const seen = new Set<string>();
+    const walk = async (dir: string): Promise<void> => {
+      if (seen.has(dir)) return;
+      seen.add(dir);
+      let entries;
+      try {
+        entries = await this.workspace.readDir(dir);
+      } catch {
+        return;
+      }
+      for (const entry of entries) {
+        if (String(entry.type).startsWith('d')) {
+          await walk(entry.path);
+        } else {
+          const content = await this.workspace.readFile(entry.path);
+          if (content !== null) files[entry.path] = content;
+        }
+      }
+    };
+    for (const root of ['/', '', '.']) await walk(root);
     return files;
+  }
+
+  async readWorkspaceFile(path: string): Promise<string | null> {
+    for (const candidate of [path, '/' + path, path.replace(/^\//, '')]) {
+      try {
+        const content = await this.workspace.readFile(candidate);
+        if (content !== null) return content;
+      } catch {
+        // try next candidate
+      }
+    }
+    return null;
+  }
+
+  async readMessages(): Promise<unknown[]> {
+    return this.messages.map((m) => ({
+      role: m.role,
+      parts: (m.parts ?? []).map((p) => {
+        const part = p as Record<string, unknown>;
+        if (part.type === 'text') return { type: 'text', text: String(part.text).slice(0, 600) };
+        return {
+          type: part.type,
+          tool: part.toolName ?? undefined,
+          state: part.state ?? undefined,
+          input: part.input ? JSON.stringify(part.input).slice(0, 300) : undefined,
+          output: part.output ? JSON.stringify(part.output).slice(0, 300) : undefined,
+          errorText: part.errorText ?? undefined,
+        };
+      }),
+    }));
   }
 
   async heartbeat() {
