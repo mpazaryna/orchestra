@@ -16,11 +16,13 @@ fi
 [[ -e "$TARGET" ]] && { echo "FAIL: $TARGET already exists"; exit 1; }
 
 mkdir -p "$TARGET"
-curl -s "$LENNY_URL/workspace?work=relnotes" -H "Authorization: Bearer $LKEY" \
-  | python3 - "$TARGET" "$TODAY" <<'PYEOF'
+EXPORT_JSON="$(mktemp)"
+curl -s "$LENNY_URL/workspace?work=relnotes" -H "Authorization: Bearer $LKEY" > "$EXPORT_JSON"
+python3 - "$TARGET" "$TODAY" "$EXPORT_JSON" <<'PYEOF'
 import json, sys, os
-target, today = sys.argv[1], sys.argv[2]
-files = json.load(sys.stdin)
+target, today, export_path = sys.argv[1], sys.argv[2], sys.argv[3]
+with open(export_path) as fh:
+    files = json.load(fh)
 for path, content in files.items():
     # Lenny had no clock and dated everything 2025-06-13; normalize.
     content = content.replace('2025-06-13', today).replace('2025-Q2', '2026-Q2')
