@@ -1,6 +1,6 @@
 ---
 ticket: 001-orchestra-pilot
-status: approved
+status: in-progress
 created_on: 2026-06-11
 ---
 
