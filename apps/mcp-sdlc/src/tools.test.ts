@@ -203,9 +203,9 @@ describe('handleTool', () => {
   });
 
   describe('orchestra_list_skills', () => {
-    it('returns all 17 skills with name, description, and when_to_use', () => {
+    it('returns all 18 skills with name, description, and when_to_use', () => {
       const result = handleTool('orchestra_list_skills', {});
-      expect(result.skills).toHaveLength(17);
+      expect(result.skills).toHaveLength(18);
       for (const skill of result.skills) {
         expect(skill.name).toMatch(/^orchestra-/);
         expect(skill.description.length).toBeGreaterThan(10);

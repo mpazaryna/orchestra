@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- launchd template for the AFK runner. Install:
+     1. Edit the repo path / work item below.
+     2. cp com.orchestra.afk-runner.plist ~/Library/LaunchAgents/
+     3. launchctl load ~/Library/LaunchAgents/com.orchestra.afk-runner.plist
+     Logs land in /tmp/afk-runner.{out,err}.log -->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.orchestra.afk-runner</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/mpaz/workspace/orchestra/apps/afk-runner/run.sh</string>
+    <string>/Users/mpaz/workspace/relnotes</string>
+    <string>m2-curation</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>900</integer>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Users/mpaz/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/afk-runner.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/afk-runner.err.log</string>
+</dict>
+</plist>
