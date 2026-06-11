@@ -1,6 +1,6 @@
 ---
 ticket: 002-afk-runner
-status: in-progress
+status: complete
 created_on: 2026-06-11
 ---
 
@@ -100,15 +100,15 @@ excerpts as `.orchestra/work/002-afk-runner/demo.md`.
 
 | File | Purpose | Status |
 |------|---------|--------|
-| skills/orchestra-afk/SKILL.md | Gate-in-repo conductor discipline, served | Not Started |
-| apps/mcp-sdlc initialize instructions (one line) | Announce orchestra-afk for unattended runs | Not Started |
-| apps/afk-runner/check-state.mjs (+ tests, fixtures) | Repo-state verdict logic | Not Started |
-| apps/afk-runner/run.sh | Session wrapper + ntfy ping | Not Started |
-| apps/afk-runner/preflight.sh | Live-boundary check | Not Started |
-| apps/afk-runner/com.orchestra.afk-runner.plist + README | Scheduling | Not Started |
-| apps/afk-runner/seed.sh | relnotes repo from Lenny's export | Not Started |
-| ~/workspace/relnotes | Seeded target repo (outside this monorepo) | Not Started |
-| .orchestra/work/002-afk-runner/demo.md | End-to-end proof | Not Started |
+| skills/orchestra-afk/SKILL.md | Gate-in-repo conductor discipline, served | Delivered |
+| apps/mcp-sdlc initialize instructions (one line) | Announce orchestra-afk for unattended runs | Delivered |
+| apps/afk-runner/check-state.mjs (+ tests, fixtures) | Repo-state verdict logic | Delivered (7 tests) |
+| apps/afk-runner/run.sh | Session wrapper + ntfy ping | Delivered |
+| apps/afk-runner/preflight.sh | Live-boundary check | Delivered (green) |
+| apps/afk-runner/com.orchestra.afk-runner.plist + README | Scheduling | Delivered (loaded, fired) |
+| apps/afk-runner/seed.sh | relnotes repo from Lenny's export | Delivered |
+| ~/workspace/relnotes | Seeded target repo (outside this monorepo) | Delivered (M1 merged, M2 active) |
+| .orchestra/work/002-afk-runner/demo.md | End-to-end proof | Delivered |
 
 ## Acceptance Criteria
 
