@@ -64,6 +64,16 @@ describe('POST /mcp — authorized', () => {
     expect(body.result.serverInfo.name).toBe('orchestra-mcp-sdlc');
   });
 
+  // F1 from 001-orchestra-pilot: without instructions, a cold agent never
+  // discovers that a process lives behind the tool catalog.
+  it('initialize announces the SDLC entry point via instructions', async () => {
+    const res = await mcp({ jsonrpc: '2.0', id: 0, method: 'initialize', params: {} });
+    const body = await res.json() as { result: { instructions?: string } };
+    expect(body.result.instructions).toBeDefined();
+    expect(body.result.instructions).toContain('orchestra_list_stages');
+    expect(body.result.instructions).toMatch(/before writing (any )?code/i);
+  });
+
   it('tools/list returns all 7 tools', async () => {
     const res = await mcp({ jsonrpc: '2.0', id: 1, method: 'tools/list' });
     expect(res.status).toBe(200);

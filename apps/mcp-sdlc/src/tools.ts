@@ -35,7 +35,11 @@ export const TOOL_DEFINITIONS: McpTool[] = [
   },
   {
     name: 'orchestra_list_stages',
-    description: 'List all SDLC stages in order.',
+    description:
+      'START HERE when beginning, resuming, or planning any work: lists the SDLC stages in ' +
+      'order (intake → prd → spec → gherkin → plan → execute). All work in this project follows ' +
+      'these stages — orient here before creating files or writing code, then fetch your current ' +
+      "stage's prompt with orchestra_get_prompt.",
     inputSchema: { type: 'object', properties: {} },
   },
   {
