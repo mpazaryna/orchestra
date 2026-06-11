@@ -44,4 +44,6 @@ expose. Requires only M2 (MCP SDLC), which is live.
 
 ## Notes
 
-Run `/orchestra-plan m5-afk` to start the planning loop. Depends on M2 only.
+To start the planning loop, fetch the `orchestra-plan` skill (locally via the
+`skills/orchestra-plan/` symlink in `.claude/skills/`, or remotely via
+`orchestra_get_skill("orchestra-plan")`) and follow it for `m5-afk`. Depends on M2 only.

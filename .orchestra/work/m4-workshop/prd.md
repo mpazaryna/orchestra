@@ -30,4 +30,6 @@ Workshop (~/workspace/workshop) aggregates all .orchestra/ folders across ~/work
 
 ## Notes
 
-Run `/orchestra-plan m4-workshop` to start the planning loop.
+To start the planning loop, fetch the `orchestra-plan` skill (locally via
+`.claude/skills/`, or remotely via `orchestra_get_skill("orchestra-plan")`) and
+follow it for `m4-workshop`.

@@ -33,4 +33,6 @@ Named for Leonard Bernstein. Lenny is the conductor — it holds session state, 
 
 ## Notes
 
-Run `/orchestra-plan m3-agent-lenny` to start the planning loop.
+To start the planning loop, fetch the `orchestra-plan` skill (locally via
+`.claude/skills/`, or remotely via `orchestra_get_skill("orchestra-plan")`) and
+follow it for `m3-agent-lenny`.
