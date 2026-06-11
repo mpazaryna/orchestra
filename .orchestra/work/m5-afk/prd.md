@@ -36,7 +36,7 @@ expose. Requires only M2 (MCP SDLC), which is live.
 
 | Material | Location | Status |
 |----------|----------|--------|
-| orchestra-pilot cold-agent test | TBD | Not Started |
+| orchestra-pilot cold-agent test | .orchestra/work/001-orchestra-pilot/prd.md | In Progress |
 | Scheduled headless run design | TBD | Not Started |
 | Gate notification mechanism | TBD | Not Started |
 | End-to-end pipeline test | .orchestra/work/ | Not Started |
