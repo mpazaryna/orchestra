@@ -1,6 +1,6 @@
 ---
 ticket: 003-starter
-status: in-progress
+status: complete
 created_on: 2026-06-11
 ---
 
@@ -69,14 +69,14 @@ section to mention `templates/`.
 
 | File | Purpose | Status |
 |------|---------|--------|
-| templates/starter/README.md | Consumer handholding doc | Not Started |
-| templates/starter/.mcp.json | Working server config | Not Started |
-| templates/starter/.gitignore | Secret hygiene | Not Started |
-| templates/create.sh | One-command stamp-out | Not Started |
-| templates/check.sh | Live drift check | Not Started |
-| templates/template.test.mjs | Unit tier | Not Started |
-| .orchestra/work/003-starter/validation.md | Fresh-project proof | Not Started |
-| CLAUDE.md layout note | templates/ documented | Not Started |
+| templates/starter/README.md | Consumer handholding doc | Delivered |
+| templates/starter/.mcp.json | Working server config | Delivered |
+| templates/starter/.gitignore | Secret hygiene | Delivered |
+| templates/create.sh | One-command stamp-out | Delivered |
+| templates/check.sh | Live drift check | Delivered (green) |
+| templates/template.test.mjs | Unit tier | Delivered (4/4) |
+| .orchestra/work/003-starter/validation.md | Fresh-project proof | Delivered (PASS, exceeded) |
+| CLAUDE.md layout note | templates/ documented | Delivered |
 
 ## Acceptance Criteria
 
