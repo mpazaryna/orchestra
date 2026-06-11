@@ -40,6 +40,18 @@ export default {
             protocolVersion: '2024-11-05',
             capabilities: { tools: {} },
             serverInfo: { name: 'orchestra-mcp-sdlc', version: '0.0.0' },
+            // F1 (001-orchestra-pilot): tool descriptions answer "what does this
+            // tool do" — only initialize instructions can answer "why reach for
+            // this catalog at all". This is the catalog's entry point.
+            instructions:
+              'This server provides Orchestra, a complete software development lifecycle for ' +
+              'agents: ordered stages with human approval gates, full playbooks (skills), project ' +
+              'scaffolding, and devlogs. When starting, resuming, or planning ANY work in this ' +
+              'project — including "set up this project" or taking an idea forward — call ' +
+              'orchestra_list_stages FIRST and follow the stages in order before writing any code. ' +
+              'Work flows PRD before spec, spec before implementation; produce the planning ' +
+              'artifacts and stop at gates that need a human decision. Use orchestra_scaffold to ' +
+              'create the .orchestra/ knowledge base in a fresh project.',
           },
         });
       }

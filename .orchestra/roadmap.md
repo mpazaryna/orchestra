@@ -14,7 +14,7 @@ the pieces it needs. (Amped per [ADR-002](.orchestra/adr/ADR-002-afk-first.md).)
 ## Success Criteria
 
 - [x] Any project can point `.mcp.json` at a deployed orchestra endpoint and get SDLC tools immediately
-- [ ] A cold agent with only the deployed tool catalog in context triggers and applies the skills unprompted (orchestra-pilot test)
+- [x] A cold agent with only the deployed tool catalog in context triggers and applies the skills unprompted (orchestra-pilot run 2, after ADR-001's trigger gap was closed with initialize `instructions`)
 - [ ] A scheduled headless run advances a real work item through gateless stages without human prompting
 - [ ] Human gates produce a notification and block until a human answers — AFK, not human-free
 - [ ] One full pipeline run completes AFK from intake to shipped

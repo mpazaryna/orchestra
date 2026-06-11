@@ -1,6 +1,6 @@
 ---
 ticket: 001-orchestra-pilot
-status: approved
+status: reviewed
 created_on: 2026-06-11
 ---
 
@@ -99,14 +99,14 @@ commit.
 
 | File | Purpose | Status |
 |------|---------|--------|
-| apps/orchestra-pilot/README.md | How to run, what it measures | Not Started |
-| apps/orchestra-pilot/brief.md | Process-word-free intake brief | Not Started |
-| apps/orchestra-pilot/preflight.sh | Live-server integration check | Not Started |
-| apps/orchestra-pilot/run.sh | Cold-run orchestrator | Not Started |
-| apps/orchestra-pilot/analyze.mjs | Transcript → verdict report | Not Started |
-| apps/orchestra-pilot/analyze.test.mjs + fixtures/ | Unit tier | Not Started |
-| apps/orchestra-pilot/runs/<ts>/ | First archived run (evidence) | Not Started |
-| .orchestra/work/001-orchestra-pilot/findings.md | Findings → M3 input | Not Started |
+| apps/orchestra-pilot/README.md | How to run, what it measures | Delivered |
+| apps/orchestra-pilot/brief.md | Process-word-free intake brief | Delivered |
+| apps/orchestra-pilot/preflight.sh | Live-server integration check | Delivered |
+| apps/orchestra-pilot/run.sh | Cold-run orchestrator | Delivered |
+| apps/orchestra-pilot/analyze.mjs | Transcript → verdict report | Delivered |
+| apps/orchestra-pilot/analyze.test.mjs + fixtures/ | Unit tier | Delivered |
+| apps/orchestra-pilot/runs/20260611T113805Z/ | First archived run (evidence) | Delivered |
+| .orchestra/work/001-orchestra-pilot/findings.md | Findings → M3 input | Delivered |
 
 ## Acceptance Criteria
 
