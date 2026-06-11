@@ -1,6 +1,6 @@
 ---
 ticket: 002-afk-runner
-status: reviewed
+status: closed
 created_on: 2026-06-11
 ---
 
