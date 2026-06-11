@@ -7,7 +7,11 @@ builds the system; consumer projects connect to the deployed MCP server.
 
 - `apps/mcp-sdlc/` — Cloudflare Worker serving the SDLC over MCP (Streamable HTTP,
   Bearer auth). Live at `https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp`.
-- `apps/agent-lenny/` — agent app (M3, in progress).
+- `apps/agent-lenny/` — gate-survival conductor (M3; parked per ADR-003, deployed but paused).
+- `apps/afk-runner/` — the repo-centric AFK loop: scheduled headless sessions, gates as
+  files, approvals as commits (ADR-003).
+- `templates/` — consumer starter (`templates/create.sh <dir> "idea"` stamps a new
+  workspace repo; `check.sh` pins the template to the live server).
 - `packages/core/` — stages, gates, and stage prompts shared across apps.
 - `skills/` — the 18 Orchestra skill playbooks (`*/SKILL.md`). **Source of truth**
   for skill content served by the MCP server.
