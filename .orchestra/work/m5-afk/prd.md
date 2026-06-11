@@ -2,33 +2,46 @@
 ticket: m5-afk
 status: draft
 created_on: 2026-06-09
+updated_on: 2026-06-11
 ---
 
 # M5: AFK
 
-**Objective:** Routine pipeline stages advance without human-in-the-loop — the agent schedules and executes SDLC steps autonomously, surfacing only the gates that require a human decision.
+**Objective:** A real work item advances through the pipeline away from
+keyboard — the loop-owner schedules and executes SDLC stages autonomously,
+surfacing only the gates that require a human decision. Scope amped per
+[ADR-002](../../adr/ADR-002-afk-first.md): the milestone closes when a run
+ships, not when it plans.
 
 ## Success Criteria
 
-- [ ] Agent Lenny runs scheduled tasks that check pipeline state
-- [ ] Stages without a human gate advance automatically
-- [ ] Human gates (PRD approval, spec approval) produce a notification or summary for review
-- [ ] At least one full pipeline run completes AFK from intake to plan
+- [ ] orchestra-pilot cold-agent test passes: a fresh agent with only the deployed tool catalog in context discovers and applies the skills unprompted
+- [ ] A scheduled headless Claude Code run checks pipeline state and advances stages without a human gate automatically
+- [ ] Human gates (PRD approval, spec approval) produce a notification or summary and block until answered
+- [ ] First staged proof: one pipeline run completes AFK from intake to plan
+- [ ] Milestone close: one pipeline run completes AFK from intake to shipped
+- [ ] Failure list from the headless runs is written up as input to the M3 Lenny PRD
 
 ## Context
 
 Part of the [Orchestra Roadmap](.orchestra/roadmap.md).
 
-This is the AFK SDLC vision — the system does the work, humans make the calls. Requires M2 (MCP SDLC) and M3 (Agent Lenny) to be complete and stable first.
+This is the AFK SDLC vision — the system does the work, humans make the calls.
+ADR-002 inverted the original dependency: this milestone no longer waits for
+M3. Headless Claude Code (which exists today and already speaks MCP) is the
+first loop-owner; Agent Lenny is built afterward, from the failures these runs
+expose. Requires only M2 (MCP SDLC), which is live.
 
 ## Materials
 
 | Material | Location | Status |
 |----------|----------|--------|
-| Scheduled task design | apps/agent-lenny/ | Not Started |
+| orchestra-pilot cold-agent test | TBD | Not Started |
+| Scheduled headless run design | TBD | Not Started |
 | Gate notification mechanism | TBD | Not Started |
 | End-to-end pipeline test | .orchestra/work/ | Not Started |
+| Failure list → M3 PRD input | .orchestra/work/m3-agent-lenny/ | Not Started |
 
 ## Notes
 
-Run `/orchestra-plan m5-afk` to start the planning loop. Depends on M2 and M3.
+Run `/orchestra-plan m5-afk` to start the planning loop. Depends on M2 only.

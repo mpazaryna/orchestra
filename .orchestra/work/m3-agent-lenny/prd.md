@@ -21,6 +21,8 @@ Part of the [Orchestra Roadmap](.orchestra/roadmap.md).
 
 Named for Leonard Bernstein. Lenny is the conductor — it holds session state, knows where the pipeline is, and routes to the right stage prompt. Think-based Durable Object enables multi-turn sessions without losing context.
 
+**Resequenced per [ADR-002](../../adr/ADR-002-afk-first.md):** this milestone now follows M5. The success criteria above are provisional — the real requirements are the observed failures of M5's scheduled headless runs (session lifetime, async human gates, state the headless harness can't hold). No implementation starts before at least one scheduled headless run has produced a failure list.
+
 ## Materials
 
 | Material | Location | Status |
