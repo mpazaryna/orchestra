@@ -1,0 +1,32 @@
+# Example relnotes configuration.
+# Copy to `relnotes.toml` and pass with `--config relnotes.toml`, or place the
+# same keys under `[tool.relnotes]` in your pyproject.toml.
+
+[relnotes]
+# Conventional-commit types dropped entirely (unless they mark a breaking change).
+noise_types = ["chore", "style", "test", "ci"]
+
+# Subject patterns (regex, case-insensitive) treated as noise regardless of type.
+noise_patterns = [
+    "^merge branch",
+    "^merge pull request",
+    "^bump version",
+    "^v?\\d+\\.\\d+\\.\\d+$",
+]
+
+# Sections, in output order. `types` lists the conventional types routed here;
+# the special catch-all section should have an empty `types` list.
+[[relnotes.sections]]
+key = "features"
+title = "✨ Features"
+types = ["feat", "feature"]
+
+[[relnotes.sections]]
+key = "fixes"
+title = "🐛 Bug Fixes"
+types = ["fix", "bugfix"]
+
+[[relnotes.sections]]
+key = "other"
+title = "🔧 Other Changes"
+types = []

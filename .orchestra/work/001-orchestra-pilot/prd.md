@@ -43,9 +43,9 @@ The devlog of 2026-06-10 named this test as the next step; today it ships.
 
 | Deliverable | Location | Status |
 |-------------|----------|--------|
-| Pilot harness (repeatable cold-run setup) | apps/orchestra-pilot/ | Not Started |
-| Captured run transcript | apps/orchestra-pilot/runs/ | Not Started |
-| Findings report | .orchestra/work/001-orchestra-pilot/findings.md | Not Started |
+| Pilot harness (repeatable cold-run setup) | apps/orchestra-pilot/ | Done |
+| Captured run transcript | apps/orchestra-pilot/runs/20260611T113805Z/ | Done |
+| Findings report | .orchestra/work/001-orchestra-pilot/findings.md | Done |
 
 ## References
 
