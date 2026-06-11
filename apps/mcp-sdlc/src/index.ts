@@ -51,7 +51,9 @@ export default {
               'orchestra_list_stages FIRST and follow the stages in order before writing any code. ' +
               'Work flows PRD before spec, spec before implementation; produce the planning ' +
               'artifacts and stop at gates that need a human decision. Use orchestra_scaffold to ' +
-              'create the .orchestra/ knowledge base in a fresh project.',
+              'create the .orchestra/ knowledge base in a fresh project. Running unattended ' +
+              '(scheduled or headless, nobody at the keyboard)? Fetch the orchestra-afk skill ' +
+              'first — it defines how to pause at human gates and resume from answered ones.',
           },
         });
       }

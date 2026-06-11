@@ -9,7 +9,7 @@ builds the system; consumer projects connect to the deployed MCP server.
   Bearer auth). Live at `https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp`.
 - `apps/agent-lenny/` — agent app (M3, in progress).
 - `packages/core/` — stages, gates, and stage prompts shared across apps.
-- `skills/` — the 17 Orchestra skill playbooks (`*/SKILL.md`). **Source of truth**
+- `skills/` — the 18 Orchestra skill playbooks (`*/SKILL.md`). **Source of truth**
   for skill content served by the MCP server.
 - `.orchestra/` — this repo's own knowledge base (roadmap, ADRs, work items, devlog).
 
