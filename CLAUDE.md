@@ -7,7 +7,7 @@ builds the system; consumer projects connect to the deployed MCP server.
 
 - `apps/mcp-sdlc/` — Cloudflare Worker serving the SDLC over MCP (Streamable HTTP,
   Bearer auth). Live at `https://orchestra-mcp-sdlc.mpazbot.workers.dev/mcp`.
-- `apps/agent-lenny/` — gate-survival conductor (M3; parked per ADR-003, deployed but paused).
+- `apps/agent-lenny/` — **removed** (M3; see ADR-003 addendum — code at git history `92b1281`).
 - `apps/afk-runner/` — the repo-centric AFK loop: scheduled headless sessions, gates as
   files, approvals as commits (ADR-003).
 - `templates/` — consumer starter (`templates/create.sh <dir> "idea"` stamps a new

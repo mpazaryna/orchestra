@@ -64,3 +64,28 @@ reviewed, diffed, and executed.
 - Any future cloud conductor proposal must clear this bar: it may hold
   state about the pipeline, never the pipeline's artifacts, and never its
   own model loop.
+
+## Addendum — full teardown (2026-06-11, same day)
+
+"Parked" lasted one afternoon. Once 002 (AFK runner) and 003 (starter)
+shipped, nothing referenced the deployment or the code, and what remained
+was pure liability: a live endpoint holding a raw `ANTHROPIC_API_KEY` in
+Worker secrets, plus a heartbeat cron waking the DO every 30 minutes
+forever. Decision, by the human:
+
+- **Deployment deleted** (`wrangler delete orchestra-agent-lenny`) — the
+  endpoint, secrets, Durable Object storage, and schedule are gone. The
+  DO's final state was archived first:
+  `.orchestra/work/m3-agent-lenny/archive/` (6 messages, 36 workspace
+  files, 2 gates).
+- **Code deleted from the tree** (`apps/agent-lenny/`). Git history is the
+  record — the code as built and demoed lives at merge commit `92b1281`
+  ("gate-survival conductor — built, demoed, parked"). The demo evidence
+  (demo.md), the findings, and this ADR remain in place.
+- `apps/afk-runner/seed.sh` is now historical (its source endpoint no
+  longer exists); it already served its one purpose — seeding
+  `~/workspace/relnotes`.
+
+What M3 permanently contributed is unchanged: the proven gate lifecycle
+(raise → notify → async answer → resume), now living on as files and
+commits in the AFK runner, and the demo that forced this ADR.

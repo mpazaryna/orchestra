@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# HISTORICAL (2026-06-11): the source endpoint (agent-lenny) was torn down
+# the same day — see ADR-003 addendum. This script served its one purpose:
+# seeding ~/workspace/relnotes. The export it pulled is archived at
+# .orchestra/work/m3-agent-lenny/archive/relnotes-workspace.json.
+#
 # Seed a real repository from parked Lenny's workspace export (ADR-003
 # continuity: the relnotes work item continues where the conductor left off).
 set -euo pipefail
