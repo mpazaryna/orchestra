@@ -41,6 +41,7 @@ expose. Requires only M2 (MCP SDLC), which is live.
 | Gate notification mechanism | TBD | Not Started |
 | End-to-end pipeline test | .orchestra/work/ | Not Started |
 | Failure list → M3 PRD input | .orchestra/work/001-orchestra-pilot/findings.md | First findings delivered (F4 = first Lenny requirement) |
+| Consumer onboarding starter | .orchestra/work/003-starter/prd.md | PRD approved |
 
 ## Notes
 
